@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 import { calcPercentHelper } from '../helpers'
 
-const Status = styled.span((props) => (`
+const Status = styled.div((props) => (`
     color: #494949;
     font-size: 14px;
-    fload: ${ props.float };
+    float: ${ props.float && 'left' };
 `))
 
 const ScoreBar = styled.div`
@@ -37,10 +37,12 @@ function Score ({
     const [expectBarVal, setExpectBarVal] = useState(0)
 
     useEffect(() => {
-        setCorrectBarVal( calcPercentHelper( score, questionCount ) )
-        setFinishedBarVal( calcPercentHelper(( questionNumber - score ), questionCount ))
-        setExpect( calcPercentHelper(( questionCount - questionNumber + score ), questionCount ))
-        setExpectBarVal( calcPercentHelper(( questionCount - questionNumber), questionCount ))
+        if( typeof score !== "undefined" ) {
+            setCorrectBarVal( calcPercentHelper( score, questionCount ) )
+            setFinishedBarVal( calcPercentHelper(( questionNumber - score ), questionCount ))
+            setExpect( calcPercentHelper(( questionCount - questionNumber + score ), questionCount ))
+            setExpectBarVal( calcPercentHelper(( questionCount - questionNumber), questionCount ))
+        }
     }, [
         score,
         questionCount,
@@ -50,8 +52,8 @@ function Score ({
     return (
         <div>
             <div>
-                <Status>{ correctBarVal }</Status>
-                <Status>{ expect }</Status>
+                <Status key={0} float='left'>{ correctBarVal }</Status>
+                <Status key={1} float='right'>{ expect }</Status>
             </div>
             <ScoreBar>
                 <ScoreBarCorrect width={correctBarVal} />

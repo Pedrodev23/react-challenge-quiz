@@ -29,11 +29,9 @@ function App () {
   const [ currentNumber, setCurrentNumber ]     = useState(0)
   const [ score, setScore ]                     = useState(0)
   const [ finieshed, setFinished ]              = useState(false)
-  
-  
-  useEffect(() => {
 
-    handleStart()
+  useEffect(() => {
+    loadQuestions()
   }, [])
 
   useEffect(() => {
@@ -54,6 +52,13 @@ function App () {
   }
 
   function handleStart() {
+    // Initialize the states
+    initialState()
+    
+    loadQuestions()
+  }
+
+  function loadQuestions() {
     // Load the Questions Data from Server
     fetch('/questions.json')
       .then(function( res ) {
@@ -82,7 +87,7 @@ function App () {
     setScore(( score + 1 ))
   }
 
-  let { question, category, difficulty, correct_answer, incorrect_answers } = currentQuestion
+  let { type, question, category, difficulty, correct_answer, incorrect_answers } = currentQuestion
   let questionCount = questions.length
   
   let titleProps = {
@@ -93,17 +98,23 @@ function App () {
   }
 
   let questionProps = {
-    question:           question,
-    correct_answer:     correct_answer,
-    incorrect_answers:  incorrect_answers, 
+    type,
+    question,
+    correct_answer,
+    incorrect_answers,
     nextQuestion:       handleNextQuestion,
     increaseScore:      handleIncreaseScore,
+  }
+
+  let progressBar = {
+    questionNumber: currentNumber + 1,
+    questionCount
   }
 
   return (
     <div className='App'>
       <Container>
-        <ProgressBar />
+        <ProgressBar {...progressBar} />
         { 
           finieshed ?
           <Finish>Finished!</Finish> :

@@ -13,10 +13,13 @@ const ProgressBarSlide = styled.div(props => ({
     width: props.score && props.questions ? `${ props.score / props.questions * 100 }%` : 0 
 }));
 
-export default function(props) {
+export default function({
+    questionNumber,
+    questionCount
+}) {
     return (
         <ProgressBar>
-            <ProgressBarSlide score={props.score} questions={props.questions} />
+            <ProgressBarSlide score={questionNumber} questions={questionCount} />
         </ProgressBar>
     )
 }

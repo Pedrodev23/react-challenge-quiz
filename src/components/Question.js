@@ -10,7 +10,7 @@ const Answers = styled.div`
 `
 
 const AnswerButton = styled.button((props) => (
-    `${props.value == props.answer ?
+    `${props.value === props.answer ?
         {
             color: '#FFFFFF',
             backgroundColor: '#000000'
@@ -34,6 +34,7 @@ const NextButton = styled.button`
 `
 
 export default function({ 
+    type,
     question, 
     correct_answer, 
     incorrect_answers,
@@ -61,7 +62,7 @@ export default function({
 
         setAnswer( chooseAnswer )
 
-        if ( correctAnswer == answer ) {
+        if ( correctAnswer === answer ) {
             increaseScore()
         }
     }
@@ -72,7 +73,7 @@ export default function({
     }
 
     function displayResult() {
-        let isCorrect = correctAnswer == answer
+        let isCorrect = correctAnswer === answer
         return (
             answer && 
             <div>
