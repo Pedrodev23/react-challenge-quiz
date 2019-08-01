@@ -43,19 +43,22 @@ const createRatingBar = (difficulty) => {
     return ratings
 }
 
-
-
-const TitleBar = (props) => (
+const TitleBar = ({
+    questionCount,
+    questionNumber,
+    difficulty,
+    category,
+}) => (
     <div>
         <Title>
-            Question { props.score } of { props.questions } 
+            Question { questionNumber + 1 } of { questionCount } 
         </Title>
         <Subtitle>
-        { uriDecodeHelper( props.category ) }
+        { uriDecodeHelper( category ) }
         </Subtitle>
         <div>
         {
-            createRatingBar(props.difficulty)
+            createRatingBar(difficulty)
         }
         </div>
     </div>

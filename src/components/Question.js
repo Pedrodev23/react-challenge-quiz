@@ -23,10 +23,22 @@ const AnswerButton = styled.button((props) => (
     }`
 ))
 
+const Message = styled.h3((props) => (
+    `
+     color: ${ props.isCorrect ? '#EEEEEE' : '#000000' };
+    `
+))
+
+const NextButton = styled.button`
+
+`
+
 export default function({ 
     question, 
     correct_answer, 
     incorrect_answers,
+    nextQuestion,
+    increaseScore,
 }) {
     const [ correctAnswer, setCorrectAnswer ] = useState()
     const [ mixedAnswers, setMixedAnswers ] = useState([])
@@ -45,12 +57,36 @@ export default function({
     }, [correct_answer, incorrect_answers])
 
     function handleAnswer( chooseAnswer ) {
-        
+        if( answer ) return
+
         setAnswer( chooseAnswer )
 
-        if ( correctAnswer == chooseAnswer ) {
-            
+        if ( correctAnswer == answer ) {
+            increaseScore()
         }
+    }
+
+    function handleNext() {
+        nextQuestion()
+        setAnswer(null)
+    }
+
+    function displayResult() {
+        let isCorrect = correctAnswer == answer
+        return (
+            answer && 
+            <div>
+                <Message 
+                    isCorrect={isCorrect} >
+                    {
+                        isCorrect ? "Correct" : "Sorry"
+                    }
+                </Message>
+                <NextButton onClick={handleNext}>
+                    Next Question
+                </NextButton>
+            </div>
+        )
     }
 
     return (
@@ -70,6 +106,9 @@ export default function({
                     ))
                 }
             </Answers>
+            {
+                displayResult()
+            }
         </div>
     )
 } 

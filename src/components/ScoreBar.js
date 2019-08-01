@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { calcPercentHelper } from '../helpers'
@@ -31,10 +31,21 @@ function Score ({
     questionNumber,
 }) {
 
-    let correctBarVal       = calcPercentHelper( score, questionCount )
-        , finishedBarVal    = calcPercentHelper(( questionNumber - score ), questionCount )
-        , expect            = calcPercentHelper(( questionCount - questionNumber + score ), questionCount )
-        , expectBarVal      = calcPercentHelper(( questionCount - questionNumber), questionCount )
+    const [correctBarVal, setCorrectBarVal] = useState(0)
+    const [finishedBarVal, setFinishedBarVal] = useState(0)
+    const [expect, setExpect] = useState(0)
+    const [expectBarVal, setExpectBarVal] = useState(0)
+
+    useEffect(() => {
+        setCorrectBarVal( calcPercentHelper( score, questionCount ) )
+        setFinishedBarVal( calcPercentHelper(( questionNumber - score ), questionCount ))
+        setExpect( calcPercentHelper(( questionCount - questionNumber + score ), questionCount ))
+        setExpectBarVal( calcPercentHelper(( questionCount - questionNumber), questionCount ))
+    }, [
+        score,
+        questionCount,
+        questionNumber,
+    ])    
 
     return (
         <div>
