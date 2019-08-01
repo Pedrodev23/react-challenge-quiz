@@ -41,7 +41,7 @@ function App () {
         setQuestions( loadedQuestions )
 
         if ( !currentNumber ) {
-          let firstQuestion = questions[currentQuestion];
+          let firstQuestion = questions[currentNumber];
 
           setCurrentQuestion(firstQuestion)
         }
@@ -51,7 +51,7 @@ function App () {
 
   }, [])
 
-  let { question } = currentQuestion
+  let { question, category, difficulty } = currentQuestion
   let questionCount = questions.length
   
   return (
@@ -59,7 +59,7 @@ function App () {
       <Container>
         <ProgressBar />
         <Content>
-          <Title />
+          <Title score={score} questions={ questionCount } category={category} difficulty = {difficulty}/>
           <Question />
         </Content>
       </Container>

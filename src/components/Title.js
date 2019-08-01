@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { MAX_LEVEL, LEVELS } from '../constants'
 
+import { uriDecodeHelper } from '../helpers'
+
 const Title = styled.h1`
     color: #494949
 `
@@ -39,11 +41,11 @@ const TitleBar = (props) => (
             Question { props.score } of { props.questions } 
         </Title>
         <Subtitle>
-        { props.category }
+        { uriDecodeHelper( props.category ) }
         </Subtitle>
         <div>
         {
-            createRatingBar("easy")
+            createRatingBar(props.difficulty)
         }
         </div>
     </div>
