@@ -1,47 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
-import ProgressBar from './components/ProgressBar'
-import Title from './components/Title'
-
-const Container = styled.div`
-  border: 5px solid #eeeeee;  
-  height: 600px;
-  margin: 50px auto;
-  width: 500px;
+const ProgressBar = styled.div`
+    width: 100%;
+    height: 15px;
+    background: #fbfbfb;
 `
+const ProgressBarSlide = styled.div(props => ({
+    display: 'block',
+    background: '#EEEEEE',
+    height: '100%',
+    width: props.score && props.questions ? `${ props.score / props.questions * 100 }%` : 0 
+}));
 
-const Content = styled.div`
-  height: 100%;
-  padding: 0 60px;
-  text-align: left;
-  width: 100%;
-`
-
-function App () {
-  
-  const [ questions, setQuestions ]          = useState([])
-  const [ currentNumber, setCurrentNumber ] = useState(0)
-  const [ score, setScore ]                 = useState(0)
-  
-  useEffect(() => {
-    var questions = fetch('./questions.json')
-    setQuestions(questions)
-  }, [])
-
-  return (
-    <div className='App'>
-      <Container>
-        <ProgressBar />
-        <Content>
-          <Title>
-
-          </Title>
-        </Content>
-      </Container>
-    </div>
-  )
+export default function(props) {
+    return (
+        <ProgressBar>
+            <ProgressBarSlide score={props.score} questions={props.questions} />
+        </ProgressBar>
+    )
 }
-
-export default App
