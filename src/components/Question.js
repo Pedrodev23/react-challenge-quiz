@@ -9,7 +9,7 @@ const Answers = styled.div`
     padding: 10px;
 `
 
-const Answer = styled.button((props) => (
+const AnswerButton = styled.button((props) => (
     `${props.value == props.answer ?
         {
             color: '#FFFFFF',
@@ -26,31 +26,30 @@ const Answer = styled.button((props) => (
 export default function({ 
     question, 
     correct_answer, 
-    incorerect_answers,
+    incorrect_answers,
 }) {
     const [ correctAnswer, setCorrectAnswer ] = useState()
     const [ mixedAnswers, setMixedAnswers ] = useState([])
-    const [ answer, setAnswer ] = useState(null)
+    const [ answer, setAnswer ] = useState()
 
     useEffect(() => {
-        if( !correctAnswer || !incorerect_answers ) return
+        if( !correct_answer || !incorrect_answers ) return
 
         setCorrectAnswer( correct_answer )
 
         let mixedArray = shuffleArrayHelper(
-            combineArrayHelper( incorerect_answers, correct_answer )
+            combineArrayHelper( incorrect_answers, correct_answer )
         )
 
         setMixedAnswers( mixedArray )
-    }, [
-        correct_answer, 
-        incorerect_answers
-    ])
+    }, [correct_answer, incorrect_answers])
 
-    const handleAnswer = (answer) => {
-        setAnswer( answer )
-        if ( correctAnswer == answer ) {
+    function handleAnswer( chooseAnswer ) {
+        
+        setAnswer( chooseAnswer )
 
+        if ( correctAnswer == chooseAnswer ) {
+            
         }
     }
 
@@ -59,13 +58,15 @@ export default function({
             <Content>
                 { uriDecodeHelper( question ) }
             </Content>
-            <Answers >
+            <Answers>
                 { 
-                    mixedAnswers.map((key, value) => (
-                        <Answer 
+                    mixedAnswers.map((val, key) => (
+                        <AnswerButton
                             key={key}
                             answer={answer} 
-                            onClick={handleAnswer(value)}/>
+                            onClick={() => { handleAnswer(val) }}>
+                        { uriDecodeHelper( val ) }
+                        </AnswerButton>
                     ))
                 }
             </Answers>
