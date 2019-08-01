@@ -3,5 +3,9 @@ export const uriDecodeHelper = function(encodedURI) {
 }
 
 export const shuffleArrayHelper = function(array) {
-    return array.sort(() => Math.random() - 0.5);
+    return array.sort(() => Math.random() - 0.5 );
+}
+
+export const combineArrayHelper = function( parentArray, childArray ) {
+    return parentArray.concat( childArray )
 }
