@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faStarOfLife } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { MAX_LEVEL, LEVELS } from '../constants'
 
 const Title = styled.h1`

@@ -21,7 +21,7 @@ const Content = styled.div`
 
 function App () {
   
-  const [ questions, setQuestions ]          = useState([])
+  const [ questions, setQuestions ]         = useState([])
   const [ currentNumber, setCurrentNumber ] = useState(0)
   const [ score, setScore ]                 = useState(0)
   
