@@ -131,7 +131,12 @@ export default function({
             <Answers>
                 { 
                     mixedAnswers.map((val, key) => { 
-                        let decodedVal = uriDecodeHelper( val )
+                        let decodedVal = null
+                        if( type === "boolean" ) {
+                            decodedVal = val == "True" ? "Yes" : "No"
+                        } else {                            
+                            decodedVal = uriDecodeHelper( val )
+                        }
                         return(
                         <AnswerButton
                             title={decodedVal}
