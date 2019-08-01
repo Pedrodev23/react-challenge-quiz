@@ -30,17 +30,30 @@ function App () {
   
   
   useEffect(() => {
-    let loadedQuestions = fetch('./questions.json')
-    
-    setQuestions( loadedQuestions )
 
-    if ( !currentNumber ) {
-      let firstQuestion = questions[currentQuestion];
-      
-      setCurrentQuestion(firstQuestion)
-    }
+    fetch('/questions.json')
+      .then(function( res ) {
+        return res.json()
+      }).then(function(questions) {
+        console.log('parsed json', questions)
+        let loadedQuestions = questions
+        
+        setQuestions( loadedQuestions )
+
+        if ( !currentNumber ) {
+          let firstQuestion = questions[currentQuestion];
+
+          setCurrentQuestion(firstQuestion)
+        }
+      }).catch(function(ex) {
+        console.log('parsing failed', ex)
+      })
+
   }, [])
 
+  let { question } = currentQuestion
+  let questionCount = questions.length
+  
   return (
     <div className='App'>
       <Container>
