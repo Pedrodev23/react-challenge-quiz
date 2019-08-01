@@ -35,7 +35,9 @@ function App () {
       <Container>
         <ProgressBar />
         <Content>
-          <Title />
+          <Title>
+
+          </Title>
         </Content>
       </Container>
     </div>
