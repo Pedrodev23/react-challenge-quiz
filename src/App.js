@@ -30,7 +30,7 @@ function App () {
   
   
   useEffect(() => {
-
+    // Load the Questions Data from Server
     fetch('/questions.json')
       .then(function( res ) {
         return res.json()
@@ -51,7 +51,7 @@ function App () {
 
   }, [])
 
-  let { question, category, difficulty } = currentQuestion
+  let { question, category, difficulty, correct_answer, incorrect_answers } = currentQuestion
   let questionCount = questions.length
   
   return (
@@ -59,8 +59,15 @@ function App () {
       <Container>
         <ProgressBar />
         <Content>
-          <Title score={score} questions={ questionCount } category={category} difficulty = {difficulty}/>
-          <Question />
+          <Title 
+            score={score} 
+            questions={ questionCount } 
+            category={category} 
+            difficulty = {difficulty} />
+          <Question 
+            question={question} 
+            correct_answer={correct_answer} 
+            incorrect_answers={incorrect_answers} />
         </Content>
       </Container>
     </div>
