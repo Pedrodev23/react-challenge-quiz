@@ -2,35 +2,69 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { uriDecodeHelper, shuffleArrayHelper, combineArrayHelper } from '../helpers'
 
-const Content = styled.div`
-        padding: 10px;
-    `
-const Answers = styled.div`
-    padding: 10px;
+const Question = styled.div`
+    display: block;
+    flex-basis: 200px;
+    flex-grow: 1;
+    padding: 10px 0;
 `
 
-const AnswerButton = styled.button((props) => (
-    `${props.value === props.answer ?
-        {
-            color: '#FFFFFF',
-            backgroundColor: '#000000'
+const Content = styled.div`
+        padding: 20px 0;
+    `
+const Answers = styled.div`
+    padding: 20px 0;
+`
+
+const AnswerButton = styled.button(({ val, answer }) => (
+    `${ val === answer ?
+        'color: #FFFFFF; background-color: #2466b7;'
+        : 'background-color: #EEEEEE;'
+    }
+        border: 1px solid #000000; 
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 4px;
+        border-radius: 6px;
+        min-width: 150px;
+        margin: 12px 0;
+        width: 40%;
+        white-space: pre;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            background-color: #0c53ab;
         }
-        :
-        {
-            color: '#FFFFFF',
-            backgroundColor: '#000000'
+        &:nth-child(2n) {
+            float: right;
         }
-    }`
+    `
 ))
 
 const Message = styled.h3((props) => (
     `
-     color: ${ props.isCorrect ? '#EEEEEE' : '#000000' };
+     color: ${ props.isCorrect ? '#2466b7' : '#000000' };
+     font-size: 30px;
+     margin: 16px;
     `
 ))
 
 const NextButton = styled.button`
-
+    background-color: #2466b7;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 6px;
+    
+    &:hover {
+        background-color: #0c53ab;
+        border: 1px solid #FFFFFF;
+    }
 `
 
 export default function({ 
@@ -76,7 +110,7 @@ export default function({
         let isCorrect = correctAnswer === answer
         return (
             answer && 
-            <div>
+            <div style={{ textAlign: 'center' }}>
                 <Message 
                     isCorrect={isCorrect} >
                     {
@@ -91,25 +125,30 @@ export default function({
     }
 
     return (
-        <div>
+        <Question>
             <Content>
                 { uriDecodeHelper( question ) }
             </Content>
             <Answers>
                 { 
-                    mixedAnswers.map((val, key) => (
+                    mixedAnswers.map((val, key) => { 
+                        let decodedVal = uriDecodeHelper( val )
+                        return(
                         <AnswerButton
-                            key={key}
+                            title={decodedVal}
+                            key={ key }
+                            val={ val}
                             answer={answer} 
                             onClick={() => { handleAnswer(val) }}>
-                        { uriDecodeHelper( val ) }
+                        { decodedVal }
                         </AnswerButton>
-                    ))
+                        )
+                    })
                 }
             </Answers>
             {
                 displayResult()
             }
-        </div>
+        </Question>
     )
 } 

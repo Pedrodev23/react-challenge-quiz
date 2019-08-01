@@ -11,13 +11,19 @@ const Container = styled.div`
   border: 5px solid #eeeeee;  
   height: 600px;
   margin: 50px auto;
-  width: 500px;
+  min-width: 500px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 `
 
 const Content = styled.div`
-  height: 100%;
   padding: 0 60px;
+  padding-top: 40px;
   text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `
 const Finish = styled.div`
 

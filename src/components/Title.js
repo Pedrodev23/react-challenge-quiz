@@ -7,13 +7,20 @@ import { MAX_LEVEL, LEVELS } from '../constants'
 import { uriDecodeHelper } from '../helpers'
 
 const Title = styled.h1`
-    color: #494949
+    color: #494949;
+    margin: 0;
 `
 const Subtitle = styled.h2`
-    color: #494949
+    color: #a2a2a2;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 4px 2px;
+    margin: 0;
 ` 
 const Rating = styled.span((props) => ({
-    color: `${ props.isValid ? '#000000' : '#EEEEEE' }`
+    color: `${ props.isValid ? '#2466b7' : '#EEEEEE' }`,
+    fontSize: '12px',
+    margin: '2px 2px',
 }));
 
 const star = <FontAwesomeIcon icon={faStar} />

@@ -10,7 +10,9 @@ const Status = styled.div((props) => (`
 `))
 
 const ScoreBar = styled.div`
-
+    height: 28px;
+    border: 2px solid #06428c;
+    border-radius: 4px;
 `
 
 const ScoreBarCorrect = styled.div`
