@@ -7,27 +7,32 @@ import Title from './components/Title'
 import Question from './components/Question'
 import ScoreBar from './components/ScoreBar'
 
-import { shuffleArrayHelper } from './helpers'
+import { shuffleArrayHelper, calcPercentHelper } from './helpers'
 
 const Container = styled.div`
   border: 5px solid #eeeeee;  
+  display: flex;
+  flex-direction: column;
   height: 600px;
   margin: 50px auto;
   min-width: 500px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
+  width: 40%;  
 `
 
 const Content = styled.div`
+  display: flex;
+  flex-grow: 1;  
+  flex-direction: column;
   padding: 40px; 60px;
   text-align: left;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 `
 const Finish = styled.div`
-
+  color: #2466b7;
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 40px;
+  text-align: center;
 `
 
 function App () {
@@ -113,26 +118,32 @@ function App () {
     increaseScore:      handleIncreaseScore,
   }
 
-  let progressBar = {
+  let progressBarProps = {
     questionNumber: currentNumber + 1,
     questionCount
+  }
+
+  let scoreBarProps = {
+    score,
+    questionNumber: currentNumber,
+    questionCount,
   }
 
   return (
     <div className='App'>
       <Container>
-        <ProgressBar {...progressBar} />
+        <ProgressBar {...progressBarProps} />
         { 
           finieshed ?
-          <Finish>Finished!</Finish> :
+          <Finish onClick={handleStart}>
+            { calcPercentHelper( score, questionCount ) }% Completed!
+            <br/>
+            Click to Start again!
+          </Finish> :
           <Content>
             <Title {...titleProps} />
             <Question {...questionProps} />
-            <ScoreBar 
-              score={score}
-              questionNumber={ currentNumber }
-              questionCount={questionCount}
-              />
+            <ScoreBar {...scoreBarProps} />
           </Content>
         }
       </Container>
