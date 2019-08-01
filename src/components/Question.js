@@ -133,7 +133,7 @@ export default function({
                     mixedAnswers.map((val, key) => { 
                         let decodedVal = null
                         if( type === "boolean" ) {
-                            decodedVal = val == "True" ? "Yes" : "No"
+                            decodedVal = val === "True" ? "Yes" : "No"
                         } else {                            
                             decodedVal = uriDecodeHelper( val )
                         }

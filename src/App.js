@@ -7,6 +7,8 @@ import Title from './components/Title'
 import Question from './components/Question'
 import ScoreBar from './components/ScoreBar'
 
+import { shuffleArrayHelper } from './helpers'
+
 const Container = styled.div`
   border: 5px solid #eeeeee;  
   height: 600px;
@@ -71,8 +73,9 @@ function App () {
       }).then(function(questions) {
         let loadedQuestions = questions
         
-        setQuestions( loadedQuestions )
-
+        setQuestions( 
+          shuffleArrayHelper( loadedQuestions )
+        )
       }).catch(function(ex) {
         console.log('parsing failed', ex)
       })
