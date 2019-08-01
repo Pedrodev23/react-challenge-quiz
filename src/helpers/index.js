@@ -11,6 +11,6 @@ export const combineArrayHelper = function( parentArray, childArray ) {
 }
 
 export const calcPercentHelper = function( small, big ) {
-    return ( small && big ) && Math.ceil( small / big * 100 )
+    return ( small && big ) ? Math.ceil( small / big * 100 ) : 0
 }
 

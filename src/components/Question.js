@@ -94,14 +94,13 @@ export default function({
     function handleAnswer( chooseAnswer ) {
         if( answer ) return
 
-        setAnswer( chooseAnswer )
-
-        if ( correctAnswer === answer ) {
-            increaseScore()
-        }
+        setAnswer( chooseAnswer )        
     }
 
     function handleNext() {
+        if ( correctAnswer === answer ) {
+            increaseScore()
+        }
         nextQuestion()
         setAnswer(null)
     }

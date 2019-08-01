@@ -18,8 +18,7 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  padding: 0 60px;
-  padding-top: 40px;
+  padding: 40px; 60px;
   text-align: left;
   flex-grow: 1;
   display: flex;
@@ -70,7 +69,6 @@ function App () {
       .then(function( res ) {
         return res.json()
       }).then(function(questions) {
-        console.log('parsed json', questions)
         let loadedQuestions = questions
         
         setQuestions( loadedQuestions )
