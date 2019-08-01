@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import ProgressBar from './components/ProgressBar'
 import Title from './components/Title'
+import Question from './components/Question'
 
 const Container = styled.div`
   border: 5px solid #eeeeee;  
@@ -36,6 +37,7 @@ function App () {
         <ProgressBar />
         <Content>
           <Title />
+          <Question />
         </Content>
       </Container>
     </div>
