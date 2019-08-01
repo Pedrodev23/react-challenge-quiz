@@ -9,3 +9,8 @@ export const shuffleArrayHelper = function(array) {
 export const combineArrayHelper = function( parentArray, childArray ) {
     return parentArray.concat( childArray )
 }
+
+export const calcPercentHelper = function( small, big ) {
+    return Math.ceil(( small / big * 100 ))
+}
+
