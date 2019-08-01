@@ -23,12 +23,22 @@ const Content = styled.div`
 function App () {
   
   const [ questions, setQuestions ]         = useState([])
+  const [ currentQuestion, setCurrentQuestion ] = useState({})
+
   const [ currentNumber, setCurrentNumber ] = useState(0)
   const [ score, setScore ]                 = useState(0)
   
+  
   useEffect(() => {
-    var questions = fetch('./questions.json')
-    setQuestions(questions)
+    let loadedQuestions = fetch('./questions.json')
+    
+    setQuestions( loadedQuestions )
+
+    if ( !currentNumber ) {
+      let firstQuestion = questions[currentQuestion];
+      
+      setCurrentQuestion(firstQuestion)
+    }
   }, [])
 
   return (
