@@ -23,9 +23,9 @@ const createRatingBar = (difficulty) => {
         //Create the parent and add the children
         let index = LEVELS.indexOf( difficulty );
         if ( i <= index ) {
-            ratings.push( <Rating isValid={true}>star</Rating> )
+            ratings.push( <Rating isValid={true}>{ star }</Rating> )
         } else {
-            ratings.push( <Rating isValid={false}>star</Rating> )
+            ratings.push( <Rating isValid={false}>{ star }</Rating> )
         } 
     }
     return ratings
